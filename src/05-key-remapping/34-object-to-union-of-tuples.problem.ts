@@ -6,9 +6,11 @@ interface Values {
   lastName: string;
 }
 
-type ValuesAsUnionOfTuples = {
+type Helper =  {
   [K in keyof Values]: [K, Values[K]];
-};
+}
+
+type ValuesAsUnionOfTuples = Helper[keyof Helper];
 
 type tests = [
   Expect<

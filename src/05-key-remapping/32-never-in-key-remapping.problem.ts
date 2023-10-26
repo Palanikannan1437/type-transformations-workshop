@@ -8,7 +8,10 @@ interface Example {
   groupId: string;
 }
 
-type OnlyIdKeys<T> = unknown;
+type StringMatcher = `${string}${"id" | "Id"}${string}`;
+type OnlyIdKeys<T> = {
+  [K in keyof T as K extends StringMatcher ? K : never]: T[K];
+};
 
 type tests = [
   Expect<
